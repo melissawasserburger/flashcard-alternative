@@ -1,0 +1,36 @@
+import React from "react";
+import { Switch, Route, useRouteMatch } from "react-router-dom";
+import NotFound from "../NotFound";
+import Study from "./Study";
+import ViewDeck from "./ViewDeck";
+import AddCard from "./CardForms/AddCard";
+import EditCard from "./CardForms/EditCard";
+import EditDeck from "./DeckForms/EditDeck";
+
+function DeckRoutes() {
+    const { url } = useRouteMatch();
+
+    return (
+        <Switch>
+            <Route path={"/decks/:deckId"} exact={true}>
+                <ViewDeck />
+            </Route>
+            <Route path={"/decks/:deckId/study"} exact={true}>
+                <Study />
+            </Route>
+            <Route path={"/decks/:deckId/edit"} exact={true}>
+                <EditDeck />
+            </Route>
+            <Route path={"/decks/:deckId/cards/new"} exact={true}>
+                <AddCard />
+            </Route>
+            <Route path={"/decks/:deckId/cards/:cardId/edit"}>
+                <EditCard />
+            </Route>
+            <Route path={url}>
+                <NotFound />
+            </Route>
+        </Switch>
+    );
+};
+export default DeckRoutes;
